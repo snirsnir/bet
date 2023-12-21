@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hacker Puzzle Game</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    width: 500px;
+    margin: auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+#answer{
+    direction: rtl;
+}
+#question {
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+
+</style>
+<body>
+    <div class="container">
+        <h1>ברוכים הבאים להאקר פאזל</h1>
+        <p>ענו על השאלות בכדי לעבור לשאלה הבאה. יש לכם 18 שאלות</p>
+        <p id="question" dir="rtl">מהו המספר הבא אחרי 1?</p>
+        <input type="text" id="answer" placeholder="התשובה">
+        <button onclick="checkAnswer()">שלחו</button>
+        <p id="error-message"></p>
+    </div>
+    <script>
+        var questions = [
+    "מהו המספר הבא אחרי 1?",
+    "כמה יוצא 1 + 2?",
+    "אם יש לך שלושה תפוחים ואתה קונה עוד אחד, כמה תפוחים יהיו לך בסך הכל?",
+    "איך אומרים 4 במילים?",
+    "אם יש לך 5 ספרים ואחותך נותנת לך עוד 5, כמה ספרים יהיו לך בסך הכל?",
+    "כמה אפסים יש במספר מאה?",
+    "איזו עיר ישראלית ידועה נמצאת ליד הים וקרובה לתל אביב?",
+    "באיזו עיר בדרום ישראל יש חופים יפים ודולפינים?",
+    "מי עיר הבירה של ספרד?",
+    "אם יש לך 25 שקלים ואתה מקבל עוד 25 שקלים, כמה שקלים יהיו לך בסך הכל?",
+    "מהו השם של מנוע החיפוש הפופולרי ביותר באינטרנט?",
+    "איזה שנה היא שנה לפני 1999?",
+    "איזה מאכל מזרחי מוכן מגרגרים לבנים קטנים?",
+    "מהו המכשיר שאנחנו משתמשים בו לכתיבה, ציור ומשחקים, ויש לו מסך ומקלדת?",
+    "איזה משקה חם נהוג לשתות בבוקר בעיקר ומקורו בברזיל?",
+    "מה המספר חולצה של הכדורגלן ערן זהבי?",
+    "איפה אנחנו כרגע? ב..",
+    "באיזה יבשת נמצאות מדינות כמו סין, יפן, והודו?"
+];
+
+var answers = ["2", "3", "4", "ארבע", "10", "2", "יפו", "אילת", "מדריד", "50", "גוגל", "1998", "אורז", "מחשב", "קפה", "7", "טכנודע", "אסיה"];
+
+var currentLevel = 0;
+
+function checkAnswer() {
+            var userAnswer = document.getElementById('answer').value;
+            var errorMessage = document.getElementById('error-message');
+            if(userAnswer === answers[currentLevel]) {
+                currentLevel++;
+                errorMessage.textContent = ''; // Clear error message
+                errorMessage.className = ''; // Clear error class
+                if(currentLevel < questions.length) {
+                    document.getElementById('question').textContent = 'שאלה ' + (currentLevel + 1) + ': ' + questions[currentLevel];
+                    document.getElementById('answer').value = '';
+                } else {
+                    document.getElementById('question').textContent = "כל הכבוד! הצלחתם במשימה וזכיתם בעיטור ההאקרים של הטכנודע";
+                    document.getElementById('answer').style.display = 'none';
+                }
+            } else {
+                errorMessage.textContent = 'טעות, נסו שנית';
+                errorMessage.className = 'error';
+            }
+        }
+    </script>
+</body>
+</html>
